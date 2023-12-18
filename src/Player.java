@@ -129,7 +129,7 @@ public class Player {
         this.y = player.y;
         this.z = player.z;
     }
-    public void attack(Player player, int damage){
+    public static void attack(Player player, int damage){
         player.hp -= damage;
     }
 }

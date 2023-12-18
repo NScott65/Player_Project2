@@ -79,19 +79,38 @@ public class Main {
 
         do{
             String yn = getYNConfirm(scan, "Has anything happened in the game?[Y/N]");
-            System.out.println(yn);
             if(yn.equalsIgnoreCase("true")){
-                System.out.println("Has anyone been attacked or been moved?(please enter the words exactly as previewed)");
+                System.out.println("Would you like to move, teleport, attack, or get a distance (please enter the words exactly as previewed).");
                 if(scan.hasNextLine()){
                     choice = scan.nextLine();
                 }else{
                     System.out.println("your input was invalid.");
                 }
-                if(choice.equalsIgnoreCase("attacked")){
+                if(choice.equalsIgnoreCase("attack")){
+                    String attackedPlayer = getNonZeroLengString(scan, "Which player was attacked?(P1, P2, P3)");
+
+                    int attackAmount = getInt(scan, "How much damage was done?");
+                    int finalAttack = 0;
+                    if(attackedPlayer.equalsIgnoreCase("P1")){
+                        Player.attack(player1, attackAmount);
+                        System.out.println(player1);
+                    }else if(attackedPlayer.equalsIgnoreCase("P2")){
+                        Player.attack(player2, attackAmount);
+                        System.out.println(player2);
+                    }else if(attackedPlayer.equalsIgnoreCase("P3")){
+                        Player.attack(player3, attackAmount);
+                        System.out.println(player3);
+                    }
 
                 }else if(choice.equalsIgnoreCase("moved")){
 
+                }else if(choice.equalsIgnoreCase("teleport")){
+
+                }else if(choice.equalsIgnoreCase("get a distance") || choice.equalsIgnoreCase("get distance") || choice.equalsIgnoreCase("distance")){
+
                 }
+            }else if(yn.equalsIgnoreCase("false")){
+                done = true;
             }
 
         }while(!done);
@@ -123,12 +142,49 @@ public class Main {
             }
         }while(!valid);
 
-        if(yn == true){
+        if(yn){
             input = "true";
-        }else if(yn == false){
+        }else if(!yn){
             input = "false";
         }
 
         return input;
+    }
+
+    public static String getNonZeroLengString(Scanner in, String prompt){
+        String input = " ";
+        boolean valid = false;
+
+        System.out.println(prompt);
+        do {
+            if (in.hasNextLine()) {
+                input = in.nextLine();
+                if (input.length() > 0) {
+                    valid = true;
+                } else {
+                    System.out.println("Your String is less than one.");
+                }
+            } else {
+                System.out.println("Your input is invalid.");
+            }
+        }while(!valid);
+        return input;
+    }
+
+    public static int getInt(Scanner in, String prompt){
+        boolean done = false;
+        int x = 0;
+
+        System.out.println(prompt);
+        do {
+            if(in.hasNextInt()){
+                x = in.nextInt();
+                done = true;
+            }else{
+                System.out.println("Invalid input. Do better.");
+            }
+            in.nextLine(); //clear buffer
+        }while(!done);
+        return x;
     }
 }
