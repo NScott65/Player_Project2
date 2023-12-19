@@ -26,7 +26,7 @@ public class Main {
         String choice = "";
 
         System.out.println("Welcome to The Game!!\nHere is the list for directions to # (North = 1, South = 2, Up = 3, Down = 4, East = 5, West = 6)\nHere is your first Player:\n");
-        System.out.println("\nX is (+)North and (-)South, Y is (+)Up and (-)Down, Z is (+)East and (-)West.");
+        System.out.println("\nX is (+)North and (-)South, Y is (+)Up and (-)Down, Z is (+)East and (-)West.\nAll invalid input will be set to a preset input.");
         System.out.println(player1 + "\n");
         System.out.println("Now enter the Name and Coordinates of the second player: ");
         System.out.println("Name: ");
@@ -111,7 +111,7 @@ public class Main {
                     int direction = getInt(scan, "Which direction is the player moving?(1-6)");
                     int distance = getInt(scan, "How far is the Player moving?");
                     if(movedPlayer.equalsIgnoreCase("P1")){
-                      Player.move(player1,direction, distance);
+                        Player.move(player1,direction, distance);
                         System.out.println("Here is an updated profile.\n");
                         System.out.println(player1);
                     }else if(movedPlayer.equalsIgnoreCase("P2")){
