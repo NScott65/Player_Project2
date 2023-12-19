@@ -93,43 +93,54 @@ public class Player {
             direction = 1;
         }
     }
-    public void move(int direction, int unit){
+    public static void move(Player player, int direction, int unit){
         if(direction >= 1 && direction <= 6){
-            this.direction = direction;
+            player.direction = direction;
         }
         else{
             direction = 1;
         }
         if(direction == 1){
-            this.x += unit;
+            player.x += unit;
         }
         else if(direction == 2){
-            this.x -= unit;
+            player.x -= unit;
         }
         else if(direction == 3){
-            this.y += unit;
+            player.y += unit;
         }
         else if(direction == 4){
-            this.y -= unit;
+            player.y -= unit;
         }
         else if(direction == 5){
-            this.z += unit;
+            player.z += unit;
         }
         else if(direction == 6){
-            this.z -= unit;
+            player.z -= unit;
         }
     }
-    public void Tp(int x,int y, int z){
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    public static void Tp(Player player, int x,int y, int z){
+        player.x = x;
+        player.y = y;
+        player.z = z;
     }
-    public void TpPlayer(Player player){
-        this.x = player.x;
-        this.y = player.y;
-        this.z = player.z;
+    public static void TpPlayer(Player playerA, Player playerB){
+        playerB.x = playerA.x;
+        playerB.y = playerA.y;
+        playerB.z = playerA.z;
     }
     public static void attack(Player player, int damage){
         player.hp -= damage;
+    }
+
+    public static double Distance(Player player, int x, int y, int z){
+        double distance = Math.sqrt(Math.pow(x - player.x,2) + Math.pow(y - player.y,2) + Math.pow(z - player.z, 2) );
+        return distance;
+
+    }
+
+    public static double PDistance(Player playerA, Player playerB){
+        double distance = Math.sqrt(Math.pow(playerA.x - playerB.x,2) + Math.pow(playerA.y - playerB.y,2) + Math.pow(playerA.z - playerB.z,2));
+        return distance;
     }
 }
